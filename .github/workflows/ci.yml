@@ -1,0 +1,30 @@
+
+name: Qahwa Project C I
+
+on:
+  push:
+  pull_request:
+
+
+jobs:
+
+  build:
+    name: build React Application
+    runs-on: ubuntu-latest
+    
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: setup node 
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install Dependences
+        run: npm ci
+
+      - name: build Application
+        run: npm run build 
