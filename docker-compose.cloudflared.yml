@@ -1,0 +1,17 @@
+# Cloudflare Tunnel ONLY - for when the Qhwaji API is already running on the host
+# (e.g. `node src/index.js`, or another container published on host port 8080).
+#
+# In the Cloudflare Zero Trust dashboard, point the tunnel's public hostname
+# service URL to:
+#   http://host.docker.internal:8080     (Windows / macOS Docker Desktop)
+# or to a container name if it runs on the same compose network.
+services:
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: qhwaji-cloudflared
+    restart: unless-stopped
+    command: tunnel run
+    environment:
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN:?Copy your tunnel token from Cloudflare Zero Trust into TUNNEL_TOKEN (.env)}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

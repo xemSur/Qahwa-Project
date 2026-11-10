@@ -1,0 +1,33 @@
+services:
+  # ---- Website (Vite build served by nginx) ----
+  web:
+    build: .
+    container_name: qhwaji-web
+    restart: unless-stopped
+    ports:
+      - "${WEB_PORT:-80}:80"
+    depends_on:
+      - api
+
+  # ---- Backend API (reachable only inside the docker network via nginx) ----
+  api:
+    build: ./server
+    container_name: qhwaji-api
+    restart: unless-stopped
+    environment:
+      - PORT=8080
+      - JWT_SECRET=${JWT_SECRET:-qhwaji-dev-secret-change-me}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@qahwaji.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-Qahwaji@2026}
+    volumes:
+      - ./server/data:/app/data
+
+  # ---- Cloudflare Tunnel (remotely-managed from the Cloudflare dashboard) ----
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: qhwaji-cloudflared
+    restart: unless-stopped
+    command: tunnel --no-autoupdate run
+    environment:
+      # Create the tunnel from Cloudflare Zero Trust dashboard and paste the token into .env
+      - TUNNEL_TOKEN=${TUNNEL_TOKEN:?Copy your tunnel token from Cloudflare Zero Trust into TUNNEL_TOKEN (.env)}

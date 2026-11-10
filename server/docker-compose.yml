@@ -1,0 +1,14 @@
+services:
+  api:
+    build: .
+    container_name: qhwaji-api
+    restart: unless-stopped
+    ports:
+      - "${API_PORT:-8080}:8080"
+    environment:
+      - PORT=8080
+      - JWT_SECRET=${JWT_SECRET:-qhwaji-dev-secret-change-me}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-admin@qahwaji.com}
+      - ADMIN_PASSWORD=${ADMIN_PASSWORD:-Qahwaji@2026}
+    volumes:
+      - ./data:/app/data

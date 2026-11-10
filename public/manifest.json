@@ -1,0 +1,15 @@
+{
+  "name": "قهوجية الحجاز - قهوجية المدينة المنورة للضيافة والمناسبات",
+  "short_name": "قهوجية",
+  "description": "حجز قهوجي لجميع المناسبات: أعراس، فعاليات، مجالس ومخيمات. قهوجية المدينة المنورة للضيافة والمناسبات",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0f0a05",
+  "theme_color": "#0f0a05",
+  "lang": "ar",
+  "dir": "rtl",
+  "icons": [
+    { "src": "/logoqahwa.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/logoqahwa.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}
