@@ -1,10 +1,5 @@
 node_modules
 dist
-server
-Dashboard
 .git
-.gitignore
-.env
+.github
 *.log
-README*
-docker-compose*.yml
