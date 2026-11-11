@@ -1,5 +1,9 @@
 node_modules
 dist
+*.local
 .env
-.DS_Store
-*.log
+.env.*
+!.env.example
+server/data
+server/*.log
+cloudflared/*.json
